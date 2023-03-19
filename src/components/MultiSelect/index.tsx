@@ -282,7 +282,16 @@ const MultiSelectComponent: <T>(
           const dataSearch = data.filter(
             searchQuery ? propSearchFunction : defaultFilterFunction
           );
-          setListData(dataSearch);
+          
+          if (dataSearch && dataSearch.length === 0) {
+            const addData = [{
+              label: `+Add: ${text}`,
+              value: `+Add: ${text}`,
+            }]
+            setListData(addData);
+          } else {
+            setListData(dataSearch);
+          }
         } else {
           setListData(data);
         }
